@@ -21,8 +21,9 @@ app = FastAPI(title="OasisAC ML Backend", version="1.0.0")
 # Загружаем модель при старте
 @app.on_event("startup")
 async def startup():
-    load_model()
-    logger.info("OasisAC backend started, model loaded.")
+    import threading
+    threading.Thread(target=load_model, daemon=True).start()
+    logger.info("OasisAC backend started, model loading in background...")
 
 
 # ── Схема запроса (точно как плагин отправляет) ────────────────────────────
