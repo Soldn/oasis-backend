@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  oasis-backend:
+    build: .
+    container_name: oasis-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/data          # модель и датасеты сохраняются здесь
+    environment:
+      - OASIS_API_KEY=your_secret_key_here   # ← ЗАМЕНИ на свой ключ
+      - MODEL_PATH=/data/model.pkl
+      - DATACOLLECT_DIR=/data/datacollect
