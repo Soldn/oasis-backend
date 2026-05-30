@@ -18,6 +18,10 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 app = FastAPI(title="OasisAC ML Backend", version="1.0.0")
 
+@app.get("/")
+async def root():
+    return {"status": "ok"}
+
 # Загружаем модель при старте
 @app.on_event("startup")
 async def startup():
